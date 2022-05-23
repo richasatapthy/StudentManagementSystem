@@ -48,18 +48,18 @@ public class StudentController {
     }
 
 
-    @Operation(summary = "insert Student details", description = "Inserting  particular Student details", tags = "post")
-    @ApiResponse(responseCode = "200", description = "Inserted the Student details", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Student.class))})
-    @PostMapping("/insert")
-    public String addStudent(@RequestBody Student student) {
-        System.out.println(student.toString());
-        Student student1 = studentServiceImpl.addStudent(student);
-        if (student1 == null) {
-            throw new ResourceNotFoundException("Student ", "id", addStudent(student1));
-        }
-        return "Data Inserted successfully";
-
-    }
+//    @Operation(summary = "insert Student details", description = "Inserting  particular Student details", tags = "post")
+//    @ApiResponse(responseCode = "200", description = "Inserted the Student details", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Student.class))})
+//    @PostMapping("/insert")
+//    public String addStudent(@RequestBody Student student) {
+//        System.out.println(student.toString());
+//        Student student1 = studentServiceImpl.addStudent(student);
+//        if (student1 == null) {
+//            throw new ResourceNotFoundException("Student ", "id", addStudent(student1));
+//        }
+//        return "Data Inserted successfully";
+//
+//    }
 //    @Operation(summary = "delete Student details", description = "Deleting  particular Student details", tags = "post")
 //    @ApiResponse(responseCode = "205", description = "Deleted the Student details", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Student.class))})
 //    @DeleteMapping("/delete{id}")
