@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Integer>  {
-    // @Query(value = "SELECT * FROM Student_Details WHERE name = :Ranjith",nativeQuery = true)
+    // @Query(value = "SELECT * FROM Student_Details WHERE name = :Rich",nativeQuery = true)
     // @Transactional(readOnly=true)
     // List<Student> getStudentsByName(@Param("name") String name);
 
