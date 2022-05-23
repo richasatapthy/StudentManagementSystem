@@ -23,6 +23,27 @@ public class StudentController {
     @Autowired
     StudentServiceImpl studentServiceImpl;
 
+    @Operation(summary = "get Student details", description = "get a list of Student details", tags = "get")
+    @ApiResponse(responseCode = "200", description = "Found the Student", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Student.class))})
+    @GetMapping("/students")
+    List<Student> getAllStudents() {
+
+        return studentServiceImpl.getAllStudents();
+    }
+
+
+    @Operation(summary = "get Student details", description = "get a list of particular Student details", tags = "get")
+    @ApiResponse(responseCode = "200", description = "Found the Student", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Student.class))})
+    @GetMapping("/students/{id}")
+    public Student getStudentById(@Valid @PathVariable("id") int id) throws ResourceNotFoundException {
+        Student student = studentServiceImpl.getStudent(id);
+        if (student == null) {
+            throw new ResourceNotFoundException("Student", "id", id);
+        }
+        return studentServiceImpl.getStudent(id);
+    }
+
+
     @Operation(summary = "insert Student details", description = "Inserting  particular Student details", tags = "post")
     @ApiResponse(responseCode = "201", description = "Inserted the Student details", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Student.class))})
     @PostMapping("/insert")
