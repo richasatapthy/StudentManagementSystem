@@ -29,7 +29,7 @@ public class RepositoryTests {
                 .age(13)
                 .address(null)
                 .build();
-        Address RichAddress = Address.builder().City("warangal").pinCode(578947).build();
+        Address RichAddress = Address.builder().City("BBS").pinCode(578947).build();
         Rich.setAddress(RichAddress);
         Student savedStudent = studentRepository.save(Rich);
 
