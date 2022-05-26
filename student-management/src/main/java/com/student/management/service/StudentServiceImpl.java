@@ -4,6 +4,8 @@ import com.student.management.exception.ResourceNotFoundException;
 import com.student.management.model.Student;
 import com.student.management.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +20,6 @@ public class StudentServiceImpl implements StudentService {
 
         return  studentRepository.findAll();
     }
-
     @Override
     public Student getStudent(int id) {
 
@@ -27,17 +28,14 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.findById(id).get();
     }
 
-
     @Override
     public Student addStudent(Student student) {
         if(student == null ){
             throw  new ResourceNotFoundException("Student","Student id",student.getId());
 
         }
-
         return studentRepository.save(student);
     }
-
     @Override
     public Student updateStudent(Student studentDetails) {
         Student student = studentRepository.findById(studentDetails.getId())
@@ -47,7 +45,6 @@ public class StudentServiceImpl implements StudentService {
 
         return studentRepository.save(student);
     }
-
     @Override
     public void deleteStudent(int id) {
         String delete = "successfully deleted";
@@ -56,5 +53,13 @@ public class StudentServiceImpl implements StudentService {
 
         studentRepository.deleteById(id);
     }
+
+   @Override
+    public Page<Student> findStudentsWithPagination(int offset, int pageSize){
+        Page<Student> students = studentRepository.findAll(PageRequest.of(offset, pageSize));
+        return  students;
+    }
+
+
 
 }

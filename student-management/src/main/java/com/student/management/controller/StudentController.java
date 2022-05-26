@@ -3,13 +3,17 @@ package com.student.management.controller;
 
 import com.student.management.exception.ResourceNotFoundException;
 import com.student.management.model.Student;
+import com.student.management.repository.StudentRepository;
 import com.student.management.service.StudentServiceImpl;
 
+import com.student.management.dto.APIResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,10 +27,18 @@ public class StudentController {
     @Autowired
     StudentServiceImpl studentServiceImpl;
 
-
-
-    // private StudentMapper studentMapper;
-
+@Autowired
+    StudentRepository studentRepository;
+    @GetMapping("/student/{name}")
+    public List<Student>FindByName(@PathVariable("name") String name){
+        List<Student>FindByName = studentRepository.FindByName(name);
+        return FindByName;
+    };
+    @GetMapping("/Student/{age}")
+    public List<Student>FindByAge(@PathVariable("age") int age) {
+        List<Student> FindByAge = studentRepository.FindByAge(age);
+        return FindByAge;
+    }
 
     @Operation(summary = "get Student details", description = "get a list of Student details", tags = "get")
     @ApiResponse(responseCode = "200", description = "Found the Student", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Student.class))})
@@ -69,7 +81,12 @@ public class StudentController {
         return "Data Inserted successfully";
 
     }
-//>>>>>>> new_student
+    @GetMapping("/pagination/{offset}/{pageSize}")
+    public Page<Student> findStudentsWithPagination(@PathVariable int offset, @PathVariable int pageSize) {
+        Page<Student> studentsWithPagination = studentServiceImpl.findStudentsWithPagination(offset, pageSize);
+        return studentsWithPagination;
+    }
+
 }
 
 

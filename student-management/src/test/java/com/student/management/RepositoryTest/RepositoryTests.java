@@ -18,28 +18,28 @@ public class RepositoryTests {
     @Autowired
     private StudentRepository studentRepository;
 
-    @Test
-    @Order(3)
-    public void testGetStudentByName()
-    {
-        //given
-        Student Rich = Student.builder()
-                .name("Rima")
-                .email("richa@gmail.com")
-                .age(13)
-                .address(null)
-                .build();
-        Address RichAddress = Address.builder().City("BBS").pinCode(578947).build();
-        Rich.setAddress(RichAddress);
-        Student savedStudent = studentRepository.save(Rich);
-
-        //when
-        Student student = studentRepository.getStudentByName("Rima");
-
-        //then
-        Assertions.assertThat(savedStudent.getId()).isNotNull();
-        Assertions.assertThat(student.getName()).isEqualTo("Rima");
-    }
+//    @Test
+//    @Order(3)
+//    public void testGetStudentByName()
+//    {
+//        //given
+//        Student Rich = Student.builder()
+//                .name("Rima")
+//                .email("richa@gmail.com")
+//                .age(13)
+//                .address(null)
+//                .build();
+//        Address RichAddress = Address.builder().City("BBS").pinCode(578947).build();
+//        Rich.setAddress(RichAddress);
+//        Student savedStudent = studentRepository.save(Rich);
+//
+//        //when
+//        Student student = (Student) StudentRepository.getStudentByName("Rima");
+//
+//        //then
+//        Assertions.assertThat(savedStudent.getId()).isNotNull();
+//        Assertions.assertThat(student.getName()).isEqualTo("Rima");
+//    }
 
     @Test
     @Order(2)
